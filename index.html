@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmos - Real-time Weather & Forecasts</title>
+    <meta name="description"
+        content="Real-time location-aware weather microapp with alerts, forecasts, and voice assistant. Built as a Progressive Web App.">
+    <meta name="keywords"
+        content="weather, weather app, pwa, progressive web app, forecast, weather alerts, geolocation, offline weather">
+    <meta name="theme-color" content="#1e3c72">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-icon">☁️</span>
+                <h1>Atmos</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="city-input" placeholder="Search city..." aria-label="Search city">
+                <button id="search-btn" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <button id="location-btn" aria-label="Use current location">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </button>
+                <button id="voice-btn" aria-label="Voice assistant">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main id="weather-content" class="hidden">
+            <!-- Current Weather Section -->
+            <section class="current-weather">
+                <div class="weather-main">
+                    <h2 id="city-name">--</h2>
+                    <p id="date-time">--</p>
+                    <div class="temp-container">
+                        <img id="weather-icon" src="" alt="Weather Icon" class="weather-icon hidden">
+                        <span id="temperature">--°</span>
+                    </div>
+                    <p id="weather-description">--</p>
+                    <div id="smart-summary" class="smart-summary hidden">
+                        <p id="summary-text"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Weather Details Grid -->
+            <section class="weather-details">
+                <div class="detail-card">
+                    <span class="detail-label">Feels Like</span>
+                    <span class="detail-value" id="feels-like">--°</span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">Humidity</span>
+                    <span class="detail-value" id="humidity">--%</span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">Wind</span>
+                    <span class="detail-value" id="wind-speed">-- m/s</span>
+                </div>
+                <div class="detail-card">
+                    <span class="detail-label">Pressure</span>
+                    <span class="detail-value" id="pressure">-- hPa</span>
+                </div>
+            </section>
+
+            <!-- Alerts Section -->
+            <section id="alerts-section" class="alerts-section hidden">
+                <h3>⚠️ Weather Alerts</h3>
+                <div id="alerts-list"></div>
+            </section>
+
+            <!-- Forecast Chart Section -->
+            <section class="forecast-section">
+                <h3>3-Day Forecast</h3>
+                <div class="chart-container">
+                    <canvas id="forecast-chart"></canvas>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading / Error States -->
+        <div id="loading-indicator" class="status-message hidden">
+            <div class="spinner"></div>
+            <p>Fetching weather data...</p>
+        </div>
+        <div id="error-message" class="status-message hidden">
+            <p id="error-text">Something went wrong.</p>
+        </div>
+
+    </div>
+
+    <!-- Main Application Module -->
+    <script type="module" src="js/main.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(() => {
+                        // Service worker registered successfully
+                    })
+                    .catch((err) => {
+                        console.error('SW registration failed:', err);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>
