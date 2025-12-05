@@ -47,16 +47,6 @@ A lightweight, location-aware weather microapp built with HTML, CSS, and Vanilla
      apiKey: 'YOUR_GROQ_API_KEY',  // Line 17
      ```
    - Get your free API key from [OpenWeather](https://openweathermap.org/api)
-   
-   **For Production (Recommended)**:
-   - Use environment variables with Vite:
-     ```bash
-     # Create .env file
-     echo "VITE_WEATHER_API_KEY=your_actual_key_here" > .env
-     # Add .env to .gitignore
-     echo ".env" >> .gitignore
-     ```
-   - The config will automatically use `VITE_WEATHER_API_KEY` if available
 
 3. **Run locally**
    
