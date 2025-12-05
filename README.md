@@ -14,11 +14,11 @@ A lightweight, location-aware weather microapp built with HTML, CSS, and Vanilla
 - ✅ **Smart Summary**: Provides context-aware advice based on weather conditions
 - ✅ **Weather Alerts**: Custom alerts for extreme conditions (heat, cold, high winds, thunderstorms)
 - ✅ **Offline Support**: PWA with caching for offline viewing
-- ✅ **Local Storage**: Caches weather data for 1 hour to reduce API calls
+- ✅ **Local Storage**: Caches weather data for 5 minutes to reduce API calls
 
 ### Enhanced Features
 - 🎯 **3-Day Forecast**: Interactive chart visualization using Chart.js
-- 🧠 **AI Voice Assistant**: Natural language conversations powered by Google Gemini
+- 🧠 **AI Voice Assistant**: Natural language conversations powered by Groq AI (LLaMA 3.3)
 - 🎤 **Smart Interactions**: Ask questions like "Should I take an umbrella?" or "Weather in Tokyo?"
 - 📱 **Installable PWA**: Add to home screen on mobile devices
 - 🎨 **Premium UI**: Glassmorphism design with smooth animations
@@ -38,11 +38,13 @@ A lightweight, location-aware weather microapp built with HTML, CSS, and Vanilla
    cd atmos
    ```
 
-2. **Configure API Key**
+2. **Configure API Keys**
    - Open `js/config.js`
-   - Replace the API key on line 17:
+   - Replace the API keys:
      ```javascript
-     export const API_KEY = 'YOUR_API_KEY_HERE';
+     export const API_KEY = 'YOUR_OPENWEATHER_API_KEY';  // Line 8
+     // And in GROQ_CONFIG:
+     apiKey: 'YOUR_GROQ_API_KEY',  // Line 17
      ```
    - Get your free API key from [OpenWeather](https://openweathermap.org/api)
    
@@ -184,7 +186,6 @@ atmos/
 ├── style.css           # Styles with glassmorphism design
 ├── manifest.json       # PWA manifest
 ├── sw.js               # Service Worker for PWA
-├── MODULES.md          # Module architecture documentation
 ├── README.md           # This file
 └── js/                 # Modular JavaScript (ES6 modules)
     ├── config.js       # Configuration and API keys
@@ -194,11 +195,12 @@ atmos/
     ├── ui.js           # DOM manipulation and UI updates
     ├── chart.js        # Chart.js forecast visualization
     ├── speech.js       # Voice assistant (STT/TTS)
-    ├── assistant.js    # AI integration (Google Gemini)
+    ├── assistant.js    # AI integration (Groq LLaMA)
+    ├── notifications.js # Browser push notifications
     └── main.js         # Application entry point
 ```
 
-> 📖 **New!** This project now uses ES6 modules for better code organization. See [MODULES.md](MODULES.md) for detailed architecture documentation.
+> 📖 This project uses ES6 modules for better code organization and maintainability.
 
 ## 🛠️ Technologies Used
 
@@ -209,7 +211,7 @@ atmos/
 - **OpenWeather API**: Weather data source
 - **Service Workers**: PWA offline support
 - **Web Speech API**: Voice recognition & synthesis
-- **Google Gemini**: LLM for natural language understanding
+- **Groq AI**: LLM for natural language understanding (LLaMA 3.3)
 
 ## 📊 API Reference
 
@@ -230,9 +232,9 @@ Edit CSS custom properties in `style.css`:
 ```
 
 ### Modify Cache Duration
-Edit `js/config.js` line 11:
+Edit `js/config.js` line 12:
 ```javascript
-export const CACHE_DURATION = 60 * 60 * 1000; // 1 hour (in milliseconds)
+export const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes (in milliseconds)
 ```
 
 ### Add More Weather Alerts
@@ -245,7 +247,7 @@ ISC License - feel free to use this project for learning or personal use.
 ## 👨‍💻 Authors
 
 - Ebel Thomas Seiko
-- Vishnu M.S.
+- Vishnu M.S
 
 ## 🙏 Acknowledgments
 
