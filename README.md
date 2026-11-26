@@ -238,6 +238,7 @@ ISC License - feel free to use this project for learning or personal use.
 
 - Ebel Thomas Seiko
 - Vishnu M.S
+- tensr (Coding Agent)
 
 ## 🙏 Acknowledgments
 
